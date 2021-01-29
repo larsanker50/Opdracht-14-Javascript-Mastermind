@@ -1,3 +1,5 @@
+let playerArray = [1, 4, 3, 4]
+console.log(playerArray)
 function addTable() {
     let myTableDiv = document.getElementById("javascriptTable");
   
@@ -6,12 +8,11 @@ function addTable() {
     let tableBody = document.createElement('tbody');
     table.appendChild(tableBody);
 
-    let i = 0
-  
-    if (i <= 12) {
+    i = 0
+    document.getElementById('button').onclick = function() {
+      if (i < 12) {
       let tr = document.createElement('tr');
       tableBody.appendChild(tr);
-  
       for (let j = 0; j < 5; j++) {
         let td = document.createElement('td');
         tr.appendChild(td);
@@ -45,17 +46,67 @@ function addTable() {
             sel.add(opt5);
             
         }
-       
         if (j == 0) {
             let number = (i + 1);
             td.appendChild(document.createTextNode(number))
         }
-      i++
       }
+      //alert("Dit is Ronde " + (i + 1));
+      i++
+      } // einde van de table create
+      controlArray = [];
+      control = {
+        1: 0,
+        2: 0
+      }
+
+      // dit stukje code werkt niet goed. Kan ook aan de colorArray liggen.
+      for (h = 0; h < 4; h++) {
+        if (playerArray.includes(colorArray[h])) {
+          controlArray.push("white")
+          control[1] = control[1] + 1;
+          console.log(colorArray[h]);
+        } else if (colorArray[h] = playerArray[h]) {
+          controlArray.push("red");
+          control[2] = control[2] + 1;
+        } else {
+        console.log("niks");
+        }
+      }
+      console.log(control)
     }
     myTableDiv.appendChild(table);
 };
 
-function buttonClick() {
-    addTable()
+function addCombination() {
+  colorArray = [];
+    colors = {
+      1: 0,
+      2: 0,
+      3: 0,
+      4: 0,
+      5: 0
+    };
+    while(colorArray.length < 4) {
+        let random = Math.floor((Math.random() * 5) + 1);
+        colorArray.push(random);
+        colors[random] = colors[random] + 1
+  }
+console.log(colorArray)
 }
+
+
+
+
+
+
+addTable();
+addCombination();
+
+
+/* 1 = blue 
+2 = green
+3 = yellow
+4 = pink
+5 = brown */
+
