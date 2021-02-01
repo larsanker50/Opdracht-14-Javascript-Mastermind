@@ -18,6 +18,19 @@ h1 {
     font-family: Arial, Helvetica, sans-serif;
 }
 
+#controleHeader {
+    border: 0;
+    font-weight: bold;
+}
+
+.white {
+    background-color: ghostwhite;
+}
+
+.red {
+    background-color: red;
+}
+
 .blue {
     background-color: blue;
 }
