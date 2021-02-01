@@ -1,5 +1,4 @@
-let playerArray = [1, 4, 3, 4]
-console.log(playerArray)
+let playerArray = []
 function addTable() {
     let myTableDiv = document.getElementById("javascriptTable");
   
@@ -18,6 +17,8 @@ function addTable() {
         tr.appendChild(td);
         if (j > 0) {
             let sel = td.appendChild(document.createElement("select"));
+            sel.classList.add("row" + i);
+            sel.classList.add("collumn" + j);
             let opt1 = td.appendChild(document.createElement("option"));
             let opt2 = td.appendChild(document.createElement("option"));
             let opt3 = td.appendChild(document.createElement("option"));
@@ -52,28 +53,43 @@ function addTable() {
         }
       }
       //alert("Dit is Ronde " + (i + 1));
-      i++
       } // einde van de table create
       controlArray = [];
       control = {
-        1: 0,
-        2: 0
+        1: 0, //hoeveel white (dus juiste kleur maar niet op juiste plaats)
+        2: 0 // hoeveel red (dus juiste kleur op de juiste plek)
       }
 
-      // dit stukje code werkt niet goed. Kan ook aan de colorArray liggen.
       for (h = 0; h < 4; h++) {
-        if (playerArray.includes(colorArray[h])) {
-          controlArray.push("white")
-          control[1] = control[1] + 1;
-          console.log(colorArray[h]);
-        } else if (colorArray[h] = playerArray[h]) {
+        if (colorArray[h] == playerArray[h]) {
           controlArray.push("red");
           control[2] = control[2] + 1;
+        } else if (playerArray.includes(colorArray[h])) {
+          controlArray.push("white")
+          control[1] = control[1] + 1;
         } else {
-        console.log("niks");
+          document.getElementById("one").innerHTML = 0;
+          document.getElementById("two").innerHTML = 0;
         }
       }
-      console.log(control)
+      if (i > 0) {
+        document.getElementById("one").innerHTML = control[1];
+        document.getElementById("two").innerHTML = control[2];
+        document.getElementById("controleHeader").innerHTML = "Controletabel beurt " + i;
+      }
+      const testArray = []
+
+      for (let t = 0; t < 4; t++) {
+        let row = "row" + [i-0] // deze werkt wel met + i maar niet + i - 1..
+        el = document.getElementsByClassName(row)[t].value;
+        testArray.push(el);
+        }
+      console.log(testArray)
+      playerArray = testArray;
+
+      if(i <= 11) {
+       i++;
+      }
     }
     myTableDiv.appendChild(table);
 };
@@ -95,13 +111,9 @@ function addCombination() {
 console.log(colorArray)
 }
 
-
-
-
-
-
-addTable();
 addCombination();
+addTable();
+
 
 
 /* 1 = blue 
@@ -109,4 +121,3 @@ addCombination();
 3 = yellow
 4 = pink
 5 = brown */
-
