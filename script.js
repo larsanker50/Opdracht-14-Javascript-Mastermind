@@ -1,5 +1,10 @@
 let playerArray = [];
+let gameOverArray = [];
+let x = 0
+let m = false;
+
 function addTable() {
+
     let myTableDiv = document.getElementById("javascriptTable");
   
     let table = document.createElement('table');
@@ -10,7 +15,11 @@ function addTable() {
     i = 0;
 
     document.getElementById('button').onclick = function() {
-      if (i < 12) {
+      controlFunction(i);
+      if (m == true) {
+        console.log("End Game")
+        return;
+      } else if (i < 12) {
       let tr = document.createElement('tr');
       tableBody.appendChild(tr);
       for (let j = 0; j < 5; j++) {
@@ -27,19 +36,19 @@ function addTable() {
             let opt5 = td.appendChild(document.createElement("option"));
 
             opt1.value = "1";
-            opt1.text = "Blue";
+            opt1.text = "Blauw";
 
             opt2.value = "2";
-            opt2.text = "Green";
+            opt2.text = "Groen";
 
             opt3.value = "3";
-            opt3.text = "Yellow";
+            opt3.text = "Geel";
 
             opt4.value = "4";
-            opt4.text = "Pink";
+            opt4.text = "Roze";
 
             opt5.value = "5";
-            opt5.text = "Brown";
+            opt5.text = "Bruin";
 
             sel.add(opt1);
             sel.add(opt2);
@@ -53,8 +62,16 @@ function addTable() {
             td.appendChild(document.createTextNode(number));
         };
       };
+      console.log(m)
+      if(i <= 11) {
+       i++;
+      };
+    };
+      myTableDiv.appendChild(table);
       //alert("Dit is Ronde " + (i + 1));
       } // einde van de table create
+    //dit is de controlfunctie. ik weet dat het niet mooi is maar het werkt zo. ik had liever deze functie op lijn 18 uitgeschreven.
+      function controlFunction(i) {
       const testArray = [];
 
       if (i > 0) {
@@ -71,33 +88,30 @@ function addTable() {
         1: 0, //hoeveel white (dus juiste kleur maar niet op juiste plaats)
         2: 0 // hoeveel red (dus juiste kleur op de juiste plek)
       };
-
+      x = 0
       for (h = 0; h < 4; h++) {
         if (colorArray[h] == playerArray[h] && colorArray.includes(playerArray[h])) {
           controlArray.push("red");
           control[2] = control[2] + 1;
+          x++;
         } else if (playerArray.includes(colorArray[h])) {
           controlArray.push("white");
           control[1] = control[1] + 1;
         }};
-      if (i == 3) { // dit klopt van geen kant. een goede manier bedenken om 2 integer arrays te checken.
-        alert("Gefeliciteerd!!! je hebt gewonnen!!");
+      if (x >= 4) { 
+        alert("Gefeliciteerd!!! je hebt gewonnen!! De juiste kleurencombinatie was " + gameOverArray);
+        m = true;
+        return;
       };
         if (i > 0) {
         document.getElementById("one").innerHTML = control[1];
         document.getElementById("two").innerHTML = control[2];
         document.getElementById("controleHeader").innerHTML = "Controletabel beurt " + i;
       };
-      if (i == 12 && (colorArray.value !== playerArray.value)) { // deze aanpassen zoals op lijn 83/84 wanneer die klaar is
-        alert("Game Over");
+      if (i == 12 && (colorArray !== playerArray)) {
+        alert("Game Over. De juiste kleurencombinatie was " + gameOverArray + ". Probeer het eens opnieuw :)");
       };
-
-      if(i <= 11) {
-       i++;
-      };
-    };
-    myTableDiv.appendChild(table);
-
+    };//einde controlefunctie
 };
 
 function addCombination() {
@@ -113,12 +127,27 @@ function addCombination() {
         let random = Math.floor((Math.random() * 5) + 1);
         colorArray.push(random);
         colors[random] = (colors[random] + 1);
+        if (random == 1) {
+          gameOverArray.push("blauw");
+        };
+        if (random == 2) {
+          gameOverArray.push("groen");
+        };
+        if (random == 3) {
+          gameOverArray.push("geel");
+        };
+        if (random == 4) {
+          gameOverArray.push("roze");
+        };
+        if (random == 5) {
+          gameOverArray.push("bruin");
+        };
   };
-}
+};
 
 addCombination();
 addTable();
-console.log(colorArray)
+console.log(colorArray);
 
 
 /* 1 = blue 
