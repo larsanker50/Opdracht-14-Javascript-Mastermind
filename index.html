@@ -1,22 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Opdracht 14: Javascript Mastermind</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <h1>Opdracht 14: Javascript Mastermind</h1>
-    <p>Spelregels:</p>
-    <p>1: Het spel wordt gespeeld in 12 rondes. In dit spel is de speler de codebreker en de computer de codemaker.</p>
-    <p>2: De computer kiest in het geheim vier code-kleuren en plaatst deze in een gekozen volgorde. Dit kunnen twee of meer pionnen in dezelfde kleur zijn. Dit is de verborgen code die de codebreker moet gaan ontrafelen.<br>In een beurt plaatst de codebreker vier code-kleuren naar keuze in de eerste rij. Nu geeft de computer met kleuren het resultaat in de controletabel:</p>
-    <ul>   <li>met rode kleuren: hoeveel kleuren staan op de juiste positie?</li>   <li>met witte kleuren: hoeveel kleuren komen wel in de code voor, maar staan niet op de juiste positie?</li></ul>
-    <p>3: Met deze nieuwe informatie plaatst de codebreker vier volgende kleuren in de eerstvolgende rij.</p>
-    <button id="button">Start / controleren</button>
-    <button onClick="window.location.reload();">Opnieuw proberen</button>
-    <br>
-    <br>
+    <div>
+        <!-- CR :: Indentations! Use tabs to show the depth in your code -->
+        <h1>Opdracht 14: Javascript Mastermind</h1>
+        <p>Spelregels:</p>
+        <!-- CR :: Try using proper HTML tags (<ol>) -->
+        <p>1: Het spel wordt gespeeld in 12 rondes. In dit spel is de speler de codebreker en de computer de codemaker.
+        </p>
+        <p>2: De computer kiest in het geheim vier code-kleuren en plaatst deze in een gekozen volgorde. Dit kunnen twee
+            of
+            meer pionnen in dezelfde kleur zijn. Dit is de verborgen code die de codebreker moet gaan ontrafelen.<br>In
+            een
+            beurt plaatst de codebreker vier code-kleuren naar keuze in de eerste rij. Nu geeft de computer met kleuren
+            het
+            resultaat in de controletabel:</p>
+        <ul>
+            <li>met rode kleuren: hoeveel kleuren staan op de juiste positie?</li>
+            <li>met witte kleuren: hoeveel kleuren komen wel in de code voor, maar staan niet op de juiste positie?</li>
+        </ul>
+        <p>3: Met deze nieuwe informatie plaatst de codebreker vier volgende kleuren in de eerstvolgende rij.</p>
+        <button id="button">Start / controleren</button>
+        <button onClick="window.location.reload();">Opnieuw proberen</button>
+        <!-- CR :: <br>? Try to use CSS to position your HTML entities -->
+        <br>
+        <br>
+    </div>
     <div id="javascriptTable"></div>
     <br>
     <br>
@@ -37,8 +54,9 @@
                 <td class="red">red</td>
                 <td id="two"></td>
             </tr>
-        </table>    
+        </table>
     </div>
     <script type="text/javascript" src="script.js"></script>
 </body>
+
 </html>
