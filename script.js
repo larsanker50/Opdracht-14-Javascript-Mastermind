@@ -4,6 +4,8 @@ let beurt = 0;
 const playerArray = [];
 const gameOverArray = [];
 const myTableDiv = document.getElementById("javascriptTable");
+const controlTable = document.getElementById("controlTable");
+const controlColorArray = [];
 const table = document.createElement("table");
 const tableBody = document.createElement("tbody");
 
@@ -14,10 +16,16 @@ function addBeurt() {
     if (beurt < 12) {
       let tr = document.createElement("tr");
       tableBody.appendChild(tr);
-      for (let tableLength = 0; tableLength < 5; tableLength++) {
+      for (let tableLength = 0; tableLength < 7; tableLength++) {
         let td = document.createElement("td");
         tr.appendChild(td);
-        if (tableLength > 0) {
+
+        if (tableLength == 0) {
+          let number = beurt + 1;
+          td.appendChild(document.createTextNode(number));
+        }
+
+        if (tableLength > 0 && tableLength < 5) {
           let sel = td.appendChild(document.createElement("select"));
           sel.classList.add("row" + beurt);
           sel.classList.add("collumn" + tableLength);
@@ -48,9 +56,13 @@ function addBeurt() {
           sel.add(opt4);
           sel.add(opt5);
         }
-        if (tableLength == 0) {
-          let number = beurt + 1;
-          td.appendChild(document.createTextNode(number));
+        if (tableLength == 5) {
+          let sel = td.appendChild(document.createElement("td"))
+          sel.className = ("white" + (beurt))
+        }
+        if (tableLength == 6) {
+          let sel = td.appendChild(document.createElement("td"))
+          sel.className = ("red" + (beurt))
         }
       }
       console.log(endGame);
@@ -62,52 +74,70 @@ function addBeurt() {
 };
 
 
-//controlfunctie. controleert of de array goed is.
+//controlfunctie. controleert of de array goed is.                //hier klopt iets niet, kleur veranderd steeds terug naar standaard waarde
 function controlFunction(beurt) {
-  if (beurt > 0) {
-    playerArray.splice(0, playerArray.length);
-    for (let classNumber = 0; classNumber < 4; classNumber++) {
-      el = parseInt(document.getElementsByClassName("row" + (beurt - 1))[classNumber].value);
-      playerArray.push(el);
+    if (beurt > 0) {
+      playerArray.splice(0, playerArray.length);
+      controlColorArray.splice(0, playerArray.length);
+      for (let classNumber = 0; classNumber < 4; classNumber++) {
+        el = parseInt(document.getElementsByClassName("row" + (beurt - 1))[classNumber].value);
+        playerArray.push(el);
+        if (document.getElementsByClassName("row" + (beurt - 1))[classNumber].value = 1) {
+          controlColorArray.push("Aqua")
+        } else if (document.getElementsByClassName("row" + (beurt - 1))[classNumber].value = 2) {
+          controlColorArray.push("LawnGreen")
+        } else if (document.getElementsByClassName("row" + (beurt - 1))[classNumber].value = 3) {
+          controlColorArray.push("yellow")
+        } else if (document.getElementsByClassName("row" + (beurt - 1))[classNumber].value = 4) {
+          controlColorArray.push("LightPink")
+        } else if (document.getElementsByClassName("row" + (beurt - 1))[classNumber].value = 5) {
+          controlColorArray.push("SandyBrown")
+        }
+      }
     }
-  }
-  controlArray = [];
-  control = {
-    1: 0, //hoeveel white (dus juiste kleur maar niet op juiste plaats)
-    2: 0, // hoeveel red (dus juiste kleur op de juiste plek)
-  };
-  AantalGoed = 0;
-  for (ArrayLength = 0; ArrayLength < 4; ArrayLength++) {
-    if (
-      colorArray[ArrayLength] == playerArray[ArrayLength] &&
-      colorArray.includes(playerArray[ArrayLength])
-    ) {
-      controlArray.push("red");
-      control[2] = control[2] + 1;
-      AantalGoed++;
-    } else if (playerArray.includes(colorArray[ArrayLength])) {
-      controlArray.push("white");
-      control[1] = control[1] + 1;
-    }};
-  if (beurt > 0) {
-    document.getElementById("one").innerHTML = control[1];
-    document.getElementById("two").innerHTML = control[2];
-    document.getElementById("controleHeader").innerHTML = "Controletabel beurt " + beurt;
-  };
-  if (AantalGoed >= 4) {
-    alert(
-      "Gefeliciteerd!!! je hebt gewonnen!! De juiste kleurencombinatie was " +
-      gameOverArray
-    );
-    endGame = true;
-    return;
-  };
-  if (beurt == 12 && colorArray !== playerArray) {
-    alert(
-      "Game Over. De juiste kleurencombinatie was " +
-      gameOverArray +
-      ". Probeer het eens opnieuw :)"
-  )}};
+    controlArray = [];
+    control = {
+      1: 0, //hoeveel white (dus juiste kleur maar niet op juiste plaats)
+      2: 0, // hoeveel red (dus juiste kleur op de juiste plek)
+    };
+    AantalGoed = 0;
+    for (ArrayLength = 0; ArrayLength < 4; ArrayLength++) {
+      if (
+        colorArray[ArrayLength] == playerArray[ArrayLength] &&
+        colorArray.includes(playerArray[ArrayLength])
+      ) {
+        controlArray.push("red");
+        control[2] = control[2] + 1;
+        AantalGoed++;
+      } else if (playerArray.includes(colorArray[ArrayLength])) {
+        controlArray.push("white");
+        control[1] = control[1] + 1;
+      }};
+    if (beurt > 0) {
+
+      document.getElementsByClassName("white" + (beurt - 1))[0].innerHTML = control[1];
+      document.getElementsByClassName("red" + (beurt - 1))[0].innerHTML = control[2];
+      document.getElementsByClassName("white" + (beurt - 1))[0].style.backgroundColor = "ghostWhite"
+      document.getElementsByClassName("red" + (beurt - 1))[0].style.backgroundColor = "red"
+      document.getElementsByClassName("row" + (beurt - 1))[0].style.backgroundColor = controlColorArray[0]
+      document.getElementsByClassName("row" + (beurt - 1))[1].style.backgroundColor = controlColorArray[1]
+      document.getElementsByClassName("row" + (beurt - 1))[2].style.backgroundColor = controlColorArray[2]
+      document.getElementsByClassName("row" + (beurt - 1))[3].style.backgroundColor = controlColorArray[3]
+    };
+    if (AantalGoed >= 4) {
+      alert(
+        "Gefeliciteerd!!! je hebt gewonnen!! De juiste kleurencombinatie was " +
+        gameOverArray
+      );
+      endGame = true;
+      return;
+    };
+    if (beurt == 12 && colorArray !== playerArray) {
+      alert(
+        "Game Over. De juiste kleurencombinatie was " +
+        gameOverArray +
+        ". Probeer het eens opnieuw :)"
+    )}};
 
 //deze functie maakt een willekeurige combinatie van 4 kleuren aan
 function addCombination() {
